@@ -1,12 +1,9 @@
 import GetFilmCards from './film-cards';
 import { FC } from 'react';
+import PromoFilm from '../../types/promo-film';
 
 type Props = {
-  promoFilm: {
-    promoFilmTitle: string;
-    promoFilmGenre: string;
-    promoFilmYear: number;
-  };
+  promoFilm: PromoFilm;
 }
 
 const MainPage: FC<Props> = (props) => {

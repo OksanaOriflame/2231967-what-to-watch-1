@@ -1,13 +1,8 @@
 import { FC } from 'react';
 import MainPage from '../../pages/main-page/main-page';
+import PromoFilm from '../../types/promo-film';
 
-type Film = {
-  promoFilmTitle: string;
-  promoFilmGenre: string;
-  promoFilmYear: number;
-}
-
-const film: Film = {
+const film: PromoFilm = {
   promoFilmTitle: 'The Grand Budapest Hotel',
   promoFilmGenre: 'Drama',
   promoFilmYear: 2014
