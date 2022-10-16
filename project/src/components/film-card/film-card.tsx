@@ -1,9 +1,12 @@
-type FilmCardProps = {
+import { FC } from 'react';
+
+type Props = {
   name: string;
-  srcRef: string;
+  imgRef: string;
 };
 
-function FilmCard({ name, srcRef }: FilmCardProps): JSX.Element {
+const FilmCard: FC<Props> = (props) => {
+  const { name, imgRef: srcRef } = props;
   return (
     <article className="small-film-card catalog__films-card">
       <div className="small-film-card__image">
@@ -13,6 +16,6 @@ function FilmCard({ name, srcRef }: FilmCardProps): JSX.Element {
         <a className="small-film-card__link" href="film-page.html">{name}</a>
       </h3>
     </article>);
-}
+};
 
 export default FilmCard;

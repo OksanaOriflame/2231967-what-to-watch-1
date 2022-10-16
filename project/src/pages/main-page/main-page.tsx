@@ -1,12 +1,16 @@
 import GetFilmCards from './film-cards';
+import { FC } from 'react';
 
-type MainPageProps = {
-  promoFilmTitle: string;
-  promoFilmGenre: string;
-  promoFilmYear: number;
+type Props = {
+  promoFilm: {
+    promoFilmTitle: string;
+    promoFilmGenre: string;
+    promoFilmYear: number;
+  };
 }
 
-function MainPage({ promoFilmTitle, promoFilmGenre, promoFilmYear }: MainPageProps): JSX.Element {
+const MainPage: FC<Props> = (props) => {
+  const { promoFilm: { promoFilmTitle, promoFilmGenre, promoFilmYear } } = props;
   return (
     <>
       <section className="film-card">
@@ -120,6 +124,6 @@ function MainPage({ promoFilmTitle, promoFilmGenre, promoFilmYear }: MainPagePro
       </div>
     </>
   );
-}
+};
 
 export default MainPage;
