@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import SignIn from '../../pages/sign-in/sign-in';
+import SignInPage from '../../pages/sign-in/sign-in-page';
 
 type AuthorizationStatus = {
   authorized: boolean;
   children: JSX.Element;
 };
 
-const Authorized: FC<AuthorizationStatus> = ({ authorized, children }) => (authorized ? children : <SignIn />);
+const Authorized: FC<AuthorizationStatus> = ({ authorized, children }) => (authorized ? children : <SignInPage />);
 
 export default Authorized;

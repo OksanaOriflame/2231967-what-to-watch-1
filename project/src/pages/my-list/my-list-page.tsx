@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const MyList: FC = () => (
+const MyListPage: FC = () => (
   <div className="user-page">
     <header className="page-header user-page__head">
       <div className="logo">
@@ -114,4 +114,4 @@ const MyList: FC = () => (
   </div>
 );
 
-export default MyList;
+export default MyListPage;

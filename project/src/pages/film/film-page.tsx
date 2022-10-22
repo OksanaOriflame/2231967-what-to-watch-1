@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const Film: FC = () => (
+const FilmPage: FC = () => (
   <>
     <section className="film-card film-card--full">
       <div className="film-card__hero">
@@ -143,4 +143,4 @@ const Film: FC = () => (
   </>
 );
 
-export default Film;
+export default FilmPage;

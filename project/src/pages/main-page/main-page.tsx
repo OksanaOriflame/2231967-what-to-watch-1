@@ -1,13 +1,14 @@
-import GetFilmCards from './film-cards';
 import { FC } from 'react';
-import PromoFilm from '../../types/promo-film';
+import GetFilmCards from './film-cards';
+import Film from '../../types/film';
 
 type Props = {
-  promoFilm: PromoFilm;
+  promoFilm: Film;
 }
 
 const MainPage: FC<Props> = (props) => {
-  const { promoFilm: { promoFilmTitle, promoFilmGenre, promoFilmYear } } = props;
+  const { promoFilm: { title: promoFilmTitle, genre: promoFilmGenre, year: promoFilmYear } } = props;
+
   return (
     <>
       <section className="film-card">

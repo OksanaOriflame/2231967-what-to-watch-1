@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const AddReview: FC = () => (
+const AddReviewPage: FC = () => (
   <section className="film-card film-card--full">
     <div className="film-card__header">
       <div className="film-card__bg">
@@ -77,4 +77,4 @@ const AddReview: FC = () => (
   </section>
 );
 
-export default AddReview;
+export default AddReviewPage;

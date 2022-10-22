@@ -1,36 +1,36 @@
 import { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import AddReview from '../../pages/add-review/add-review';
-import Film from '../../pages/film/film';
+import AddReviewPage from '../../pages/add-review/add-review-page';
+import FilmPage from '../../pages/film/film-page';
 import MainPage from '../../pages/main-page/main-page';
-import MyList from '../../pages/my-list/my-list';
-import NotFound from '../../pages/not-found/not-found';
-import Player from '../../pages/player/player';
-import SignIn from '../../pages/sign-in/sign-in';
-import PromoFilm from '../../types/promo-film';
+import MyListPage from '../../pages/my-list/my-list-page';
+import NotFoundPage from '../../pages/not-found/not-found-page';
+import PlayerPage from '../../pages/player/player-page';
+import SignInPage from '../../pages/sign-in/sign-in-page';
+import Film from '../../types/film';
 import Authorized from '../authorized/authorized';
 
-const film: PromoFilm = {
-  promoFilmTitle: 'The Grand Budapest Hotel',
-  promoFilmGenre: 'Drama',
-  promoFilmYear: 2014
+const promoFilm: Film = {
+  title: 'The Grand Budapest Hotel',
+  genre: 'Drama',
+  year: 2014
 };
 
 const App: FC = () => (
   <BrowserRouter>
     <Routes>
-      <Route path={'/'} element={<MainPage promoFilm={film} />} />
-      <Route path={'/login'} element={<SignIn />} />
+      <Route path={'/'} element={<MainPage promoFilm={promoFilm} />} />
+      <Route path={'/login'} element={<SignInPage />} />
       <Route path={'/mylist'} element={
         <Authorized authorized={false}>
-          <MyList />
+          <MyListPage />
         </Authorized>
       }
       />
-      <Route path={'/films/:id'} element={<Film />} />
-      <Route path={'/films/:id/review'} element={<AddReview />} />
-      <Route path={'/player'} element={<Player />} />
-      <Route path={'*'} element={<NotFound />} />
+      <Route path={'/films/:id'} element={<FilmPage />} />
+      <Route path={'/films/:id/review'} element={<AddReviewPage />} />
+      <Route path={'/player'} element={<PlayerPage />} />
+      <Route path={'*'} element={<NotFoundPage />} />
     </Routes>
   </BrowserRouter>
 );
