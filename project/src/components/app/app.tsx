@@ -10,26 +10,24 @@ import SignInPage from '../../pages/sign-in/sign-in-page';
 import Film from '../../types/film';
 import Authorized from '../authorized/authorized';
 
-const promoFilm: Film = {
-  title: 'The Grand Budapest Hotel',
-  genre: 'Drama',
-  year: 2014
+type Props = {
+  films: Film[];
 };
 
-const App: FC = () => (
+const App: FC<Props> = ({films}) => (
   <BrowserRouter>
     <Routes>
-      <Route path={'/'} element={<MainPage promoFilm={promoFilm} />} />
+      <Route path={'/'} element={<MainPage promoFilm={films[0]} films={films} />} />
       <Route path={'/login'} element={<SignInPage />} />
       <Route path={'/mylist'} element={
         <Authorized authorized={false}>
-          <MyListPage />
+          <MyListPage films={films} />
         </Authorized>
       }
       />
-      <Route path={'/films/:id'} element={<FilmPage />} />
-      <Route path={'/films/:id/review'} element={<AddReviewPage />} />
-      <Route path={'/player'} element={<PlayerPage />} />
+      <Route path={'/films/:id'} element={<FilmPage films={films} />} />
+      <Route path={'/films/:id/review'} element={<AddReviewPage films={films} />} />
+      <Route path={'/player'} element={<PlayerPage film={films[0]}/>} />
       <Route path={'*'} element={<NotFoundPage />} />
     </Routes>
   </BrowserRouter>

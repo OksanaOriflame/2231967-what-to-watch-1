@@ -1,19 +1,20 @@
 import { FC } from 'react';
-import GetFilmCards from './film-cards';
 import Film from '../../types/film';
+import FilmList from '../../components/film-list/film-list';
 
 type Props = {
+  films: Film[];
   promoFilm: Film;
 }
 
-const MainPage: FC<Props> = (props) => {
-  const { promoFilm: { title: promoFilmTitle, genre: promoFilmGenre, year: promoFilmYear } } = props;
+const MainPage: FC<Props> = ({films, promoFilm}) => {
+  const { name: title, genre, released } = promoFilm;
 
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={promoFilmTitle} />
+          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header film-card__head">
@@ -41,10 +42,10 @@ const MainPage: FC<Props> = (props) => {
               <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width={218} height={327} />
             </div>
             <div className="film-card__desc">
-              <h2 className="film-card__title">{promoFilmTitle}</h2>
+              <h2 className="film-card__title">{title}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{promoFilmGenre}</span>
-                <span className="film-card__year">{promoFilmYear}</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{released}</span>
               </p>
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button">
@@ -100,9 +101,7 @@ const MainPage: FC<Props> = (props) => {
               <a href="/" className="catalog__genres-link">Thrillers</a>
             </li>
           </ul>
-          <div className="catalog__films-list">
-            {GetFilmCards()}
-          </div>
+          <FilmList films={films} />
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>

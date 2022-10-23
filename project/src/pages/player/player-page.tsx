@@ -1,8 +1,13 @@
 import { FC } from 'react';
+import Film from '../../types/film';
 
-const PlayerPage: FC = () => (
+type Props = {
+  film: Film;
+}
+
+const PlayerPage: FC<Props> = ({ film: {posterImage, videoLink, runTime, name} }) => (
   <div className="player">
-    <video src="#" className="player__video" poster="img/player-poster.jpg" />
+    <video src={videoLink} className="player__video" poster={posterImage} />
     <button type="button" className="player__exit">Exit</button>
     <div className="player__controls">
       <div className="player__controls-row">
@@ -10,7 +15,7 @@ const PlayerPage: FC = () => (
           <progress className="player__progress" value={30} max={100} />
           <div className="player__toggler" style={{ left: '30%' }}>Toggler</div>
         </div>
-        <div className="player__time-value">1:30:29</div>
+        <div className="player__time-value">{runTime}</div>
       </div>
       <div className="player__controls-row">
         <button type="button" className="player__play">
@@ -19,7 +24,7 @@ const PlayerPage: FC = () => (
           </svg>
           <span>Play</span>
         </button>
-        <div className="player__name">Transpotting</div>
+        <div className="player__name">{name}</div>
         <button type="button" className="player__full-screen">
           <svg viewBox="0 0 27 27" width={27} height={27}>
             <use xlinkHref="#full-screen" />
