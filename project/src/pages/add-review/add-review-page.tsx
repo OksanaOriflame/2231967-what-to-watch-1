@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const AddReview: FC = () => (
+const AddReviewPage: FC = () => (
   <section className="film-card film-card--full">
     <div className="film-card__header">
       <div className="film-card__bg">
@@ -21,7 +21,7 @@ const AddReview: FC = () => (
               <a href="film-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
             </li>
             <li className="breadcrumbs__item">
-              <a className="breadcrumbs__link">Add review</a>
+              <a href="/" className="breadcrumbs__link">Add review</a>
             </li>
           </ul>
         </nav>
@@ -32,7 +32,7 @@ const AddReview: FC = () => (
             </div>
           </li>
           <li className="user-block__item">
-            <a className="user-block__link">Sign out</a>
+            <a href="/" className="user-block__link">Sign out</a>
           </li>
         </ul>
       </header>
@@ -77,4 +77,4 @@ const AddReview: FC = () => (
   </section>
 );
 
-export default AddReview;
+export default AddReviewPage;

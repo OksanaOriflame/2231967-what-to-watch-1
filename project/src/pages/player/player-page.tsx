@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const Player: FC = () => (
+const PlayerPage: FC = () => (
   <div className="player">
     <video src="#" className="player__video" poster="img/player-poster.jpg" />
     <button type="button" className="player__exit">Exit</button>
@@ -31,4 +31,4 @@ const Player: FC = () => (
   </div>
 );
 
-export default Player;
+export default PlayerPage;

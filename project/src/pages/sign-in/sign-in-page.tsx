@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const SignIn: FC = () => (
+const SignInPage: FC = () => (
   <div className="user-page">
     <header className="page-header user-page__head">
       <div className="logo">
@@ -44,4 +44,4 @@ const SignIn: FC = () => (
   </div>
 );
 
-export default SignIn;
+export default SignInPage;

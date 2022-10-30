@@ -1,13 +1,14 @@
-import GetFilmCards from './film-cards';
 import { FC } from 'react';
-import PromoFilm from '../../types/promo-film';
+import GetFilmCards from './film-cards';
+import Film from '../../types/film';
 
 type Props = {
-  promoFilm: PromoFilm;
+  promoFilm: Film;
 }
 
 const MainPage: FC<Props> = (props) => {
-  const { promoFilm: { promoFilmTitle, promoFilmGenre, promoFilmYear } } = props;
+  const { promoFilm: { title: promoFilmTitle, genre: promoFilmGenre, year: promoFilmYear } } = props;
+
   return (
     <>
       <section className="film-card">
@@ -17,7 +18,7 @@ const MainPage: FC<Props> = (props) => {
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header film-card__head">
           <div className="logo">
-            <a className="logo__link">
+            <a href="/" className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
@@ -30,7 +31,7 @@ const MainPage: FC<Props> = (props) => {
               </div>
             </li>
             <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
+              <a href="/" className="user-block__link">Sign out</a>
             </li>
           </ul>
         </header>
@@ -69,34 +70,34 @@ const MainPage: FC<Props> = (props) => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <ul className="catalog__genres-list">
             <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
+              <a href="/" className="catalog__genres-link">All genres</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
+              <a href="/" className="catalog__genres-link">Comedies</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
+              <a href="/" className="catalog__genres-link">Crime</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
+              <a href="/" className="catalog__genres-link">Documentary</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
+              <a href="/" className="catalog__genres-link">Dramas</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
+              <a href="/" className="catalog__genres-link">Horror</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids &amp; Family</a>
+              <a href="/" className="catalog__genres-link">Kids &amp; Family</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
+              <a href="/" className="catalog__genres-link">Romance</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
+              <a href="/" className="catalog__genres-link">Sci-Fi</a>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
+              <a href="/" className="catalog__genres-link">Thrillers</a>
             </li>
           </ul>
           <div className="catalog__films-list">
@@ -108,7 +109,7 @@ const MainPage: FC<Props> = (props) => {
         </section>
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
+            <a href="/" className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
