@@ -9,7 +9,7 @@ type Props = {
 const FilmList: FC<Props> = ({films}) => {
   const [, setActiveFilm] = useState<Film | null>(null);
 
-  const handleMouseOver: (film: Film) => void = (film) => setActiveFilm(film);
+  const handleMouseOver = (film: Film) => setActiveFilm(film);
 
   return (
     <div className="catalog__films-list">

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ReviewForm from '../../components/review-form/review-form';
 import Film from '../../types/film';
-import GetFilmById from '../../utils/get-film';
+import getFilmById from '../../utils/get-film';
 import NotFoundPage from '../not-found/not-found-page';
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 const AddReviewPage: FC<Props> = ({films}) => {
   const {id: pathId} = useParams();
 
-  const film = GetFilmById(films, pathId);
+  const film = getFilmById(films, pathId);
 
   if (film === undefined)
   {

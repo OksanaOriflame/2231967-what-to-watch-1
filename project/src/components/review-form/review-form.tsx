@@ -5,7 +5,7 @@ const ReviewForm: FC = () => {
   const [, setReviewValue] = useState(0);
   const [reviewText, setReviewText] = useState('');
 
-  const handleValueChange = (newValue: number): void => {
+  const handleValueChange = (newValue: number) => {
     setReviewValue(newValue);
   };
 

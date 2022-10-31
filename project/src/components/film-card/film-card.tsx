@@ -7,11 +7,12 @@ type Props = {
   onMouseOver: (film: Film) => void;
 };
 
-const FilmCard: FC<Props> = ({film, onMouseOver}) => {
+const FilmCard: FC<Props> = ({ film, onMouseOver }) => {
   const { name, previewImage, id } = film;
+  const handleMouseOver = () => onMouseOver(film);
 
   return (
-    <article className="small-film-card catalog__films-card" onMouseOver={() => onMouseOver(film)}>
+    <article className="small-film-card catalog__films-card" onMouseOver={handleMouseOver}>
       <div className="small-film-card__image">
         <img src={previewImage} alt={name} width={280} height={175} />
       </div>
