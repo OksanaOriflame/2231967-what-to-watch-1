@@ -14,7 +14,7 @@ const AddReviewPage: FC<Props> = ({films}) => {
 
   const film = getFilmById(films, pathId);
 
-  if (film === undefined)
+  if (!film)
   {
     return (<NotFoundPage />);
   }
