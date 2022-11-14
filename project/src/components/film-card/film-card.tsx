@@ -13,11 +13,10 @@ const FilmCard: FC<Props> = ({ film, onMouseOver }) => {
   const [isPlay, setIsPlay] = useState(false);
   const [isStartPlay, setIsStartPlay] = useState(false);
 
-  useEffect(() =>{
+  useEffect(() => {
     let playState = true;
 
-    if (isStartPlay)
-    {
+    if (isStartPlay) {
       setTimeout(() => {
         setIsPlay(playState);
       }, 1000);
