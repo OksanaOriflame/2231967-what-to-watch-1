@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import FilmList from '../../components/film-list/film-list';
+import FilmPageTabs from '../../components/film-page-tabs/film-page-tabs';
 import Film from '../../types/film';
 import getFilmById from '../../utils/get-film';
 import NotFoundPage from '../not-found/not-found-page';
@@ -12,6 +13,7 @@ type Props = {
 const FilmPage: FC<Props> = ({films}) => {
   const {id: pathId} = useParams();
   const film = getFilmById(films, pathId);
+  const moreLikeThis = films.filter((x) => x.id !== film?.id && x.genre === film?.genre).slice(0, 4);
 
   if (film === undefined)
   {
@@ -76,40 +78,14 @@ const FilmPage: FC<Props> = ({films}) => {
             <div className="film-card__poster film-card__poster--big">
               <img src={film.posterImage} alt={film.name} width={218} height={327} />
             </div>
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="/" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-              <div className="film-rating">
-                <div className="film-rating__score">{film.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{film.scoresCount} ratings</span>
-                </p>
-              </div>
-              <div className="film-card__text">
-                <p>{film.description}</p>
-                <p className="film-card__director"><strong>Director: {film.director}</strong></p>
-                <p className="film-card__starring"><strong>Starring: {film.starring.join(', ')} and other</strong></p>
-              </div>
-            </div>
+            <FilmPageTabs film={film} />
           </div>
         </div>
       </section>
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmList films={films} />
+          <FilmList films={moreLikeThis} />
         </section>
         <footer className="page-footer">
           <div className="logo">

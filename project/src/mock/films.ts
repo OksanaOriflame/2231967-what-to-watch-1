@@ -3,7 +3,7 @@ import Film from '../types/film';
 const FILMS: Film[] = [
   {
     id: 1,
-    name: 'The Grand Budapest Hotel',
+    name: 'FILM!',
     posterImage: 'img/bohemian-rhapsody.jpg',
     previewImage: 'img/bohemian-rhapsody.jpg',
     backgroundImage: 'img/bohemian-rhapsody.jpg',
@@ -18,7 +18,7 @@ const FILMS: Film[] = [
       'Bill Murray'
     ],
     runTime: 99,
-    genre: 'Comedy',
+    genre: 'Drama',
     released: 2014,
     isFavorite: false
   },
