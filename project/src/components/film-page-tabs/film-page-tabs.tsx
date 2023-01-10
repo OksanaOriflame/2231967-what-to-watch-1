@@ -29,7 +29,7 @@ const FilmPageTabs: FC<Props> = ({ film }) => {
   ];
 
   return (
-    <Tabs tabsName="film-nav" tabs={tabs} wrapper={FilmPageTabsWrapper} listWrapper={FilmPageTabsListWrapper}/>
+    <Tabs tabsName="film-nav" tabs={tabs} tabsWrapper={FilmPageTabsWrapper} tabsListWrapper={FilmPageTabsListWrapper}/>
   );
 };
 
