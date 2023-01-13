@@ -5,16 +5,18 @@ import GenreList from '../../components/genre-list/genre-list';
 import Genre from '../../types/genre';
 import FILMS from '../../mock/films';
 import { useAppSelector } from '../../hooks/store';
+import ShowMore from '../../components/show-more/show-more';
 
 type Props = {
   promoFilm: Film;
 }
 
 const MainPage: FC<Props> = ({ promoFilm }) => {
-  const { films, activeGenre } = useAppSelector((state) => state);
+  const { films, activeGenre, showedFilmsCount } = useAppSelector((state) => state);
   const { name: title, genre, released } = promoFilm;
   const genres = [Genre.ALL_GENRES, ...new Set(FILMS.map((film) => film.genre as Genre))];
   const filteredFilms = films.filter((film) => film.genre === activeGenre || activeGenre === Genre.ALL_GENRES);
+  const hasMoreFilms = filteredFilms.length > showedFilmsCount;
 
   return (
     <>
@@ -76,10 +78,8 @@ const MainPage: FC<Props> = ({ promoFilm }) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenreList genres={genres}></GenreList>
-          <FilmList films={filteredFilms} />
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <FilmList films={filteredFilms.slice(0, showedFilmsCount)} />
+          {hasMoreFilms && <ShowMore />}
         </section>
         <footer className="page-footer">
           <div className="logo">
