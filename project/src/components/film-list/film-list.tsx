@@ -13,7 +13,7 @@ const FilmList: FC<Props> = ({films}) => {
 
   return (
     <div className="catalog__films-list">
-      {films.map((x) => <FilmCard key={x.name} onMouseOver={handleMouseOver} film={x} />)}
+      {films.map((x) => <FilmCard key={x.id} onMouseOver={handleMouseOver} film={x} />)}
     </div>);
 };
 
