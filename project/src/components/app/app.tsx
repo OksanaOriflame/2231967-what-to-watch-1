@@ -17,7 +17,7 @@ type Props = {
 const App: FC<Props> = ({films}) => (
   <BrowserRouter>
     <Routes>
-      <Route path={'/'} element={<MainPage promoFilm={films[0]} films={films} />} />
+      <Route path={'/'} element={<MainPage promoFilm={films[0]} />} />
       <Route path={'/login'} element={<SignInPage />} />
       <Route path={'/mylist'} element={
         <Authorized authorized={false}>
