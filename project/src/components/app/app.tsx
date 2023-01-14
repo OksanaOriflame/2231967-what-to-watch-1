@@ -9,6 +9,8 @@ import PlayerPage from '../../pages/player/player-page';
 import SignInPage from '../../pages/sign-in/sign-in-page';
 import Film from '../../types/film';
 import Authorized from '../authorized/authorized';
+import ScrollToTop from '../scroll-to-top/scroll-to-top';
+import RefreshShowMore from '../show-more/refresh-show-more';
 
 type Props = {
   films: Film[];
@@ -16,6 +18,8 @@ type Props = {
 
 const App: FC<Props> = ({films}) => (
   <BrowserRouter>
+    <ScrollToTop/>
+    <RefreshShowMore/>
     <Routes>
       <Route path={'/'} element={<MainPage promoFilm={films[0]} />} />
       <Route path={'/login'} element={<SignInPage />} />
