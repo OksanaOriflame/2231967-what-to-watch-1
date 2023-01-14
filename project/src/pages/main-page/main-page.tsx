@@ -3,7 +3,6 @@ import Film from '../../types/film';
 import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
 import Genre from '../../types/genre';
-import FILMS from '../../mock/films';
 import { useAppSelector } from '../../hooks/store';
 import ShowMore from '../../components/show-more/show-more';
 
@@ -14,7 +13,7 @@ type Props = {
 const MainPage: FC<Props> = ({ promoFilm }) => {
   const { films, activeGenre, showedFilmsCount } = useAppSelector((state) => state);
   const { name: title, genre, released } = promoFilm;
-  const genres = [Genre.ALL_GENRES, ...new Set(FILMS.map((film) => film.genre as Genre))];
+  const genres = [Genre.ALL_GENRES, ...new Set(films.map((film) => film.genre))] as Genre[];
   const filteredFilms = films.filter((film) => film.genre === activeGenre || activeGenre === Genre.ALL_GENRES);
   const hasMoreFilms = filteredFilms.length > showedFilmsCount;
 

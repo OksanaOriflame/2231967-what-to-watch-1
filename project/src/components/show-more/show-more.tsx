@@ -1,7 +1,8 @@
+import { FC } from 'react';
 import { useAppDispatch } from '../../hooks/store';
 import { incrementShowedFilmsCount } from '../../store/action';
 
-const ShowMore = () => {
+const ShowMore: FC = () => {
   const dispatch = useAppDispatch();
   const handleOnClick = () =>{
     dispatch(incrementShowedFilmsCount());
