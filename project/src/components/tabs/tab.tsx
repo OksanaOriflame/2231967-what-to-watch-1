@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler } from 'react';
+import { FC } from 'react';
 
 type Props = {
   tabsName: string;
@@ -9,14 +9,13 @@ type Props = {
 }
 
 const Tab: FC<Props> = ({ tabsName, isActive, name, index, onClick }) => {
-  const handleOnClick: MouseEventHandler = (e) => {
-    e.preventDefault();
+  const handleOnClick = () => {
     onClick(index);
   };
 
   return (
     <li className={`${tabsName}__item${isActive ? ` ${tabsName}__item--active` : ''}`}>
-      <a href="/" className={`${tabsName}__link`} onClick={handleOnClick}>{name}</a>
+      <div className={`${tabsName}__link`} onClick={handleOnClick}>{name}</div>
     </li>
   );
 };

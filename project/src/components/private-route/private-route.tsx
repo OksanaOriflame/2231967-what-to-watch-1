@@ -1,11 +1,19 @@
 import { FC } from 'react';
-import SignInPage from '../../pages/sign-in/sign-in-page';
+import { Navigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks/store';
+import AuthorizationStatus from '../../types/authorization-status';
 
-type AuthorizationStatus = {
-  authorized: boolean;
+type Props = {
   children: JSX.Element;
 };
 
-const PrivateRoute: FC<AuthorizationStatus> = ({ authorized, children }) => (authorized ? children : <SignInPage />);
+const PrivateRoute: FC<Props> = ({ children }) => {
+  const { authorizationStatus } = useAppSelector((state) => state);
+
+  return authorizationStatus === AuthorizationStatus.Authorized
+    ? children
+    : <Navigate to={AppRoute.SignIn} />;
+};
 
 export default PrivateRoute;

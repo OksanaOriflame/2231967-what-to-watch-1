@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/store';
 import AddReviewPage from '../../pages/add-review/add-review-page';
 import FilmPage from '../../pages/film/film-page';
@@ -25,18 +26,18 @@ const App: FC = () => {
       <ScrollToTop />
       <RefreshShowMore />
       <Routes>
-        <Route path={'/'} element={<MainPage promoFilm={films[0]} />} />
-        <Route path={'/login'} element={<SignInPage />} />
-        <Route path={'/mylist'} element={
-          <PrivateRoute authorized={false}>
+        <Route path={AppRoute.Main} element={<MainPage promoFilm={films[0]} />} />
+        <Route path={AppRoute.SignIn} element={<SignInPage />} />
+        <Route path={AppRoute.MyList} element={
+          <PrivateRoute>
             <MyListPage films={films} />
           </PrivateRoute>
         }
         />
-        <Route path={'/films/:id'} element={<FilmPage films={films} />} />
-        <Route path={'/films/:id/review'} element={<AddReviewPage films={films} />} />
-        <Route path={'/player'} element={<PlayerPage film={films[0]} />} />
-        <Route path={'*'} element={<NotFoundPage />} />
+        <Route path={AppRoute.Film} element={<FilmPage />} />
+        <Route path={AppRoute.Review} element={<AddReviewPage films={films} />} />
+        <Route path={AppRoute.Player} element={<PlayerPage />} />
+        <Route path={AppRoute.Default} element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );
