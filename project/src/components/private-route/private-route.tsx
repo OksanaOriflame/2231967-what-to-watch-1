@@ -6,6 +6,6 @@ type AuthorizationStatus = {
   children: JSX.Element;
 };
 
-const Authorized: FC<AuthorizationStatus> = ({ authorized, children }) => (authorized ? children : <SignInPage />);
+const PrivateRoute: FC<AuthorizationStatus> = ({ authorized, children }) => (authorized ? children : <SignInPage />);
 
-export default Authorized;
+export default PrivateRoute;
