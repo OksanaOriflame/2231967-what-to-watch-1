@@ -7,6 +7,7 @@ import { useAppSelector } from '../../hooks/store';
 import ShowMore from '../../components/show-more/show-more';
 import UserBlock from '../../components/user-block/user-block';
 import PlayButton from '../../components/play-button/play-button';
+import Logo from '../../components/logo/logo';
 
 type Props = {
   promoFilm: Film;
@@ -27,13 +28,7 @@ const MainPage: FC<Props> = ({ promoFilm }) => {
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header film-card__head">
-          <div className="logo">
-            <a href="/" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo />
           <UserBlock />
         </header>
         <div className="film-card__wrap">
@@ -69,13 +64,7 @@ const MainPage: FC<Props> = ({ promoFilm }) => {
           {hasMoreFilms && <ShowMore />}
         </section>
         <footer className="page-footer">
-          <div className="logo">
-            <a href="/" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo isLight />
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
           </div>

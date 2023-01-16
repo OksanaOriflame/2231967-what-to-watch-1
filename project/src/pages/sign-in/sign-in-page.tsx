@@ -1,5 +1,6 @@
 import { FC, FormEvent, useRef } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import Logo from '../../components/logo/logo';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/store';
 import { logInAction } from '../../store/api-actions';
@@ -26,13 +27,7 @@ const SignInPage: FC = () => {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
-        <div className="logo">
-          <Link to={AppRoute.Main} className="logo__link">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </Link>
-        </div>
+        <Logo />
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
       <div className="sign-in user-page__content">
@@ -53,13 +48,7 @@ const SignInPage: FC = () => {
         </form>
       </div>
       <footer className="page-footer">
-        <div className="logo">
-          <Link to={AppRoute.Main} className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </Link>
-        </div>
+        <Logo isLight />
         <div className="copyright">
           <p>© 2019 What to watch Ltd.</p>
         </div>

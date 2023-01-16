@@ -1,20 +1,37 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Logo from '../../components/logo/logo';
 import ReviewForm from '../../components/review-form/review-form';
+import Spinner from '../../components/spinner/spinner';
+import UserBlock from '../../components/user-block/user-block';
+import api from '../../services/api';
 import Film from '../../types/film';
-import getFilmById from '../../utils/get-film';
 import NotFoundPage from '../not-found/not-found-page';
 
-type Props = {
-  films: Film[];
-}
+const AddReviewPage: FC = () => {
+  const {id: filmId} = useParams();
+  const [film, setFilm] = useState<Film | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-const AddReviewPage: FC<Props> = ({films}) => {
-  const {id: pathId} = useParams();
+  useEffect(() => {
+    const fetchFilm = async () => {
+      if (!filmId) {
+        return;
+      }
+      const { data: filmData } = await api.get<Film>(`/films/${filmId}`);
+      setFilm(filmData);
+    };
 
-  const film = getFilmById(films, pathId);
+    fetchFilm()
+      .finally(() => setIsLoading(false));
+  });
 
-  if (!film)
+  if (isLoading)
+  {
+    return (<Spinner />);
+  }
+
+  if (!film || !filmId)
   {
     return (<NotFoundPage />);
   }
@@ -29,39 +46,24 @@ const AddReviewPage: FC<Props> = ({films}) => {
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header">
-          <div className="logo">
-            <Link to="/" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
-          </div>
+          <Logo />
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href={`films/:${id}`} className="breadcrumbs__link">{name}</a>
+                <Link to={`films/:${id}`} className="breadcrumbs__link">{name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a href="/" className="breadcrumbs__link">Add review</a>
+                <Link to={`films/:${id}/review`} className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a href="/" className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <UserBlock />
         </header>
         <div className="film-card__poster film-card__poster--small">
           <img src={posterImage} alt={name} width={218} height={327} />
         </div>
       </div>
-      <ReviewForm />
+      <ReviewForm filmId={filmId}/>
     </section>
   );
 };

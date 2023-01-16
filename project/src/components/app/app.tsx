@@ -35,7 +35,12 @@ const App: FC = () => {
         }
         />
         <Route path={AppRoute.Film} element={<FilmPage />} />
-        <Route path={AppRoute.Review} element={<AddReviewPage films={films} />} />
+        <Route path={AppRoute.Review} element={
+          <PrivateRoute>
+            <AddReviewPage />
+          </PrivateRoute>
+        }
+        />
         <Route path={AppRoute.Player} element={<PlayerPage />} />
         <Route path={AppRoute.Default} element={<NotFoundPage />} />
       </Routes>
