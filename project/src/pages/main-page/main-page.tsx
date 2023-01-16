@@ -5,6 +5,8 @@ import GenreList from '../../components/genre-list/genre-list';
 import Genre from '../../types/genre';
 import { useAppSelector } from '../../hooks/store';
 import ShowMore from '../../components/show-more/show-more';
+import UserBlock from '../../components/user-block/user-block';
+import PlayButton from '../../components/play-button/play-button';
 
 type Props = {
   promoFilm: Film;
@@ -12,7 +14,7 @@ type Props = {
 
 const MainPage: FC<Props> = ({ promoFilm }) => {
   const { films, activeGenre, showedFilmsCount } = useAppSelector((state) => state);
-  const { name: title, genre, released } = promoFilm;
+  const { name: title, genre, released, posterImage, backgroundImage } = promoFilm;
   const genres = [Genre.ALL_GENRES, ...new Set(films.map((film) => film.genre))] as Genre[];
   const filteredFilms = films.filter((film) => film.genre === activeGenre || activeGenre === Genre.ALL_GENRES);
   const hasMoreFilms = filteredFilms.length > showedFilmsCount;
@@ -21,7 +23,7 @@ const MainPage: FC<Props> = ({ promoFilm }) => {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title} />
+          <img src={backgroundImage} alt={title} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header film-card__head">
@@ -32,21 +34,12 @@ const MainPage: FC<Props> = ({ promoFilm }) => {
               <span className="logo__letter logo__letter--3">W</span>
             </a>
           </div>
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a href="/" className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <UserBlock />
         </header>
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width={218} height={327} />
+              <img src={posterImage} alt="The Grand Budapest Hotel poster" width={218} height={327} />
             </div>
             <div className="film-card__desc">
               <h2 className="film-card__title">{title}</h2>
@@ -55,12 +48,7 @@ const MainPage: FC<Props> = ({ promoFilm }) => {
                 <span className="film-card__year">{released}</span>
               </p>
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width={19} height={19}>
-                    <use xlinkHref="#play-s" />
-                  </svg>
-                  <span>Play</span>
-                </button>
+                <PlayButton film={promoFilm}/>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width={19} height={20}>
                     <use xlinkHref="#add" />

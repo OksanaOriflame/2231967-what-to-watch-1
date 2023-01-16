@@ -10,7 +10,7 @@ const ShowMore: FC = () => {
 
   return (
     <div className="catalog__more">
-      <button className="catalog__button" type="button" onClick={() => handleOnClick()}>Show more</button>
+      <button className="catalog__button" type="button" onClick={handleOnClick}>Show more</button>
     </div>
   );
 };

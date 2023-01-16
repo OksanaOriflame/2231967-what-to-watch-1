@@ -1,16 +1,54 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
+import { dropToken, saveToken } from '../services/token';
+import AuthorizationData from '../types/authorization-data';
+import AuthorizationStatus from '../types/authorization-status';
 import Film from '../types/film';
 import { AppDispatch, State } from '../types/store';
-import { setFilms, setIsDataLoading } from './action';
+import User from '../types/user';
+import { setAuthorizationStatus, setFilms, setIsDataLoading, setUser } from './action';
 
-const loadFilms = createAsyncThunk<void, undefined, { dispatch: AppDispatch; state: State; extra: AxiosInstance }>
+export const loadFilmsAction = createAsyncThunk<void, undefined, { dispatch: AppDispatch; state: State; extra: AxiosInstance }>
 ('loadFilms',
   async (_arg, { dispatch, extra: api }) => {
     dispatch(setIsDataLoading(true));
-    const { data } = await api.get<Film[]>('/films');
-    dispatch(setFilms(data));
+    const { data: films } = await api.get<Film[]>('/films');
+    dispatch(setFilms(films));
     dispatch(setIsDataLoading(false));
   });
 
-export default loadFilms;
+export const checkAuthorizationStatusAction = createAsyncThunk<void, undefined, { dispatch: AppDispatch; state: State; extra: AxiosInstance }>
+('checkAuthorizationStatus',
+  async (_arg, { dispatch, extra: api }) => {
+    try {
+      const { data: user } = await api.get<User>('/login');
+      dispatch(setUser(user));
+      dispatch(setAuthorizationStatus(AuthorizationStatus.Authorized));
+    }
+    catch {
+      dispatch(setAuthorizationStatus(AuthorizationStatus.Unauthorized));
+    }
+  });
+
+export const logInAction = createAsyncThunk<void, AuthorizationData, { dispatch: AppDispatch; state: State; extra: AxiosInstance }>
+('logIn',
+  async (credentials, { dispatch, extra: api }) => {
+    try {
+      const { data: user } = await api.post<User>('/login', credentials);
+      saveToken(user.token);
+      dispatch(setUser(user));
+      dispatch(setAuthorizationStatus(AuthorizationStatus.Authorized));
+    }
+    catch {
+      dispatch(setAuthorizationStatus(AuthorizationStatus.Unauthorized));
+    }
+  });
+
+export const logOutAction = createAsyncThunk<void, undefined, { dispatch: AppDispatch; state: State; extra: AxiosInstance }>
+('logOut',
+  async (credentials, { dispatch, extra: api }) => {
+    await api.delete<User>('/logout', credentials);
+    dropToken();
+    dispatch(setUser(null));
+    dispatch(setAuthorizationStatus(AuthorizationStatus.Unauthorized));
+  });

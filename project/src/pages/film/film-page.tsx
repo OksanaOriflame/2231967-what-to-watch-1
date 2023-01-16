@@ -2,16 +2,15 @@ import { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import FilmList from '../../components/film-list/film-list';
 import FilmPageTabs from '../../components/film-page-tabs/film-page-tabs';
-import Film from '../../types/film';
+import PlayButton from '../../components/play-button/play-button';
+import UserBlock from '../../components/user-block/user-block';
+import { useAppSelector } from '../../hooks/store';
 import getFilmById from '../../utils/get-film';
 import NotFoundPage from '../not-found/not-found-page';
 
-type Props = {
-  films: Film[];
-}
-
-const FilmPage: FC<Props> = ({films}) => {
+const FilmPage: FC = () => {
   const {id: pathId} = useParams();
+  const { films } = useAppSelector((state) => state);
   const film = getFilmById(films, pathId);
   const moreLikeThis = films.filter((x) => x.id !== film?.id && x.genre === film?.genre).slice(0, 4);
 
@@ -36,16 +35,7 @@ const FilmPage: FC<Props> = ({films}) => {
                 <span className="logo__letter logo__letter--3">W</span>
               </Link>
             </div>
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width={63} height={63} />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <Link to="/" className="user-block__link">Sign out</Link>
-              </li>
-            </ul>
+            <UserBlock />
           </header>
           <div className="film-card__wrap">
             <div className="film-card__desc">
@@ -55,12 +45,7 @@ const FilmPage: FC<Props> = ({films}) => {
                 <span className="film-card__year">{film.released}</span>
               </p>
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width={19} height={19}>
-                    <use xlinkHref="#play-s" />
-                  </svg>
-                  <span>Play</span>
-                </button>
+                <PlayButton film={film} />
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width={19} height={20}>
                     <use xlinkHref="#add" />
