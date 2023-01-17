@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios';
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
@@ -12,6 +11,7 @@ const ReviewForm: FC<Props> = ({ filmId }) => {
   const [reviewValue, setReviewValue] = useState(0);
   const [reviewText, setReviewText] = useState('');
   const [formDisabled, setFormDisabled] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
   const navigate = useNavigate();
 
   const handleValueChange = (newValue: number) => {
@@ -34,15 +34,15 @@ const ReviewForm: FC<Props> = ({ filmId }) => {
       .then(() => {
         navigate(`/films/${filmId}`);
       })
-      .catch((error: AxiosError) => {
-        alert(error.message);
+      .catch((err: Error) => {
+        setError(err);
       })
       .finally(() => {
         setFormDisabled(false);
       });
   };
 
-  const isSubmitDisabled = reviewText.length < 50 || reviewText.length > 400 || formDisabled;
+  const isSubmitDisabled = reviewText.length < 50 || reviewText.length > 400 || formDisabled || reviewValue < 1;
 
   return (
     <div className="add-review">
@@ -59,6 +59,7 @@ const ReviewForm: FC<Props> = ({ filmId }) => {
           </div>
         </div>
       </form>
+      {error && <p>{'Review was cancelled due to an error'}</p>}
     </div>);
 };
 

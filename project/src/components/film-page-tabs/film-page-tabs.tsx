@@ -22,7 +22,7 @@ const FilmPageTabs: FC<Props> = ({ film, comments }) => {
     },
     {
       name: 'Details',
-      content: <Details />
+      content: <Details film={film} />
     },
     {
       name: 'Reviews',

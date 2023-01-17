@@ -11,7 +11,7 @@ const Review: FC<Props> = ({ comment }) => (
       <p className="review__text">{comment.comment}</p>
       <footer className="review__details">
         <cite className="review__author">{comment.user.name}</cite>
-        <time className="review__date" dateTime="2016-12-24">{comment.date}</time>
+        <time className="review__date" dateTime="2016-12-24">{new Date(comment.date).toLocaleDateString('en-us', { year:'numeric', month:'long', day:'numeric'})}</time>
       </footer>
     </blockquote>
     <div className="review__rating">{comment.rating}</div>

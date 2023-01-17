@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import ReviewForm from '../../components/review-form/review-form';
 import Spinner from '../../components/spinner/spinner';
@@ -24,7 +24,7 @@ const AddReviewPage: FC = () => {
 
     fetchFilm()
       .finally(() => setIsLoading(false));
-  });
+  }, [filmId]);
 
   if (isLoading)
   {
@@ -50,10 +50,10 @@ const AddReviewPage: FC = () => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`films/:${id}`} className="breadcrumbs__link">{name}</Link>
+                <a href={`films/${id}`} className="breadcrumbs__link">{name}</a>
               </li>
               <li className="breadcrumbs__item">
-                <Link to={`films/:${id}/review`} className="breadcrumbs__link">Add review</Link>
+                <a href={`films/${id}/review`} className="breadcrumbs__link">Add review</a>
               </li>
             </ul>
           </nav>

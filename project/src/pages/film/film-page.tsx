@@ -50,7 +50,7 @@ const FilmPage: FC = () => {
       .then(() => fetchSimilar())
       .then(() => fetchComments())
       .finally(() => setIsLoading(false));
-  });
+  }, [filmId]);
 
   if (isLoading)
   {
