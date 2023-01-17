@@ -22,4 +22,6 @@ const createApi = () => {
   return api;
 };
 
-export default createApi;
+const api = createApi();
+
+export default api;

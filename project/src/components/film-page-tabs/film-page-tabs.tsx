@@ -7,12 +7,14 @@ import FilmPageTabsWrapper from './film-page-tabs-wrapper';
 import FilmPageTabsListWrapper from './film-page-tabs-list-wrapper';
 import Details from './details';
 import Reviews from './reviews';
+import Comment from '../../types/comment';
 
 type Props = {
   film: Film;
+  comments: Comment[];
 }
 
-const FilmPageTabs: FC<Props> = ({ film }) => {
+const FilmPageTabs: FC<Props> = ({ film, comments }) => {
   const tabs: TabItem[] = [
     {
       name: 'Overview',
@@ -20,11 +22,11 @@ const FilmPageTabs: FC<Props> = ({ film }) => {
     },
     {
       name: 'Details',
-      content: <Details />
+      content: <Details film={film} />
     },
     {
       name: 'Reviews',
-      content: <Reviews />
+      content: <Reviews comments={comments} />
     }
   ];
 
