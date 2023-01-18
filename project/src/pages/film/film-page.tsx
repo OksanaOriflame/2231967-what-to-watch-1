@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import AddFavoriteButton from '../../components/add-favorite-button/add-favorite-button';
 import FilmList from '../../components/film-list/film-list';
 import FilmPageTabs from '../../components/film-page-tabs/film-page-tabs';
 import Logo from '../../components/logo/logo';
@@ -59,13 +60,7 @@ const FilmPage: FC = () => {
               </p>
               <div className="film-card__buttons">
                 <PlayButton filmId={film.id} />
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width={19} height={20}>
-                    <use xlinkHref="#add" />
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+                <AddFavoriteButton filmId={film.id} />
                 {authorizationStatus === AuthorizationStatus.Authorized && <Link to={`/films/${film.id}/review`} className="btn film-card__button">Add review</Link>}
               </div>
             </div>

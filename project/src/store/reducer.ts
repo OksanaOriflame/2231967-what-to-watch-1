@@ -5,7 +5,7 @@ import Comment from '../types/comment';
 import Film from '../types/film';
 import Genre from '../types/genre';
 import User from '../types/user';
-import { changeGenre, incrementShowedFilmsCount, refreshShowedFilmsCount, setAuthorizationStatus, setFilms, setIsDataLoading, setPromoFilm, setUser } from './action';
+import { changeGenre, incrementShowedFilmsCount, refreshShowedFilmsCount, setAuthorizationStatus, setFavoriteFilms, setFilms, setIsDataLoading, setPromoFilm, setUser } from './action';
 import { loadComments, loadFilm, loadSimilar } from './api-actions';
 
 type AppState = {
@@ -19,6 +19,7 @@ type AppState = {
   isDataLoading: boolean;
   authorizationStatus: AuthorizationStatus;
   user: User | null;
+  favoriteFilms: Film[];
 }
 
 const initialState: AppState = {
@@ -31,7 +32,8 @@ const initialState: AppState = {
   showedFilmsCount: DEFAULT_SHOWED_FILMS_COUNT,
   isDataLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown,
-  user: null
+  user: null,
+  favoriteFilms: Array<Film>(0)
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -68,6 +70,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setUser, (state, action) => {
       state.user = action.payload;
+    })
+    .addCase(setFavoriteFilms, (state, action) => {
+      state.favoriteFilms = action.payload;
     });
 });
 

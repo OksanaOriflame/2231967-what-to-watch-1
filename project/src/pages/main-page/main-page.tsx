@@ -7,6 +7,7 @@ import ShowMore from '../../components/show-more/show-more';
 import UserBlock from '../../components/user-block/user-block';
 import PlayButton from '../../components/play-button/play-button';
 import Logo from '../../components/logo/logo';
+import AddFavoriteButton from '../../components/add-favorite-button/add-favorite-button';
 
 const MainPage: FC = () => {
   const { films, promoFilm, activeGenre, showedFilmsCount } = useAppSelector((state) => state);
@@ -39,13 +40,7 @@ const MainPage: FC = () => {
               </p>
               <div className="film-card__buttons">
                 <PlayButton filmId={id}/>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width={19} height={20}>
-                    <use xlinkHref="#add" />
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+                <AddFavoriteButton filmId={id} />
               </div>
             </div>
           </div>

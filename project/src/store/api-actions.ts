@@ -7,7 +7,7 @@ import Comment from '../types/comment';
 import Film from '../types/film';
 import { AppDispatch, State } from '../types/store';
 import User from '../types/user';
-import { setAuthorizationStatus, setFilms, setIsDataLoading, setPromoFilm, setUser } from './action';
+import { setAuthorizationStatus, setFavoriteFilms, setFilms, setIsDataLoading, setPromoFilm, setUser } from './action';
 
 export const loadFilmsAction = createAsyncThunk<void, undefined, { dispatch: AppDispatch; state: State; extra: AxiosInstance }>
 ('loadFilms',
@@ -17,6 +17,8 @@ export const loadFilmsAction = createAsyncThunk<void, undefined, { dispatch: App
     dispatch(setFilms(films));
     const { data: promoFilm } = await api.get<Film>('/promo');
     dispatch(setPromoFilm(promoFilm));
+    const { data: favoriteFilms } = await api.get<Film[]>('/favorite');
+    dispatch(setFavoriteFilms(favoriteFilms));
     dispatch(setIsDataLoading(false));
   });
 
@@ -75,4 +77,14 @@ export const loadComments = createAsyncThunk<Comment[], number, { dispatch: AppD
   async (filmId, { extra: api }) => {
     const { data: commentsData } = await api.get<Comment[]>(`/comments/${filmId}`);
     return commentsData;
+  });
+
+export const setIsFavoriteFilm = createAsyncThunk<void, { filmId: number; isFavorite: boolean }, { dispatch: AppDispatch; state: State; extra: AxiosInstance }>
+('setIsFavoriteFilm',
+  async ({ filmId, isFavorite }, { dispatch, extra: api }) => {
+    dispatch(setIsDataLoading(true));
+    await api.post<Film>(`/favorite/${filmId}/${isFavorite ? '1' : '0'}`);
+    const { data: favoriteFilms } = await api.get<Film[]>('/favorite');
+    dispatch(setFavoriteFilms(favoriteFilms));
+    dispatch(setIsDataLoading(false));
   });

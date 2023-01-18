@@ -12,3 +12,4 @@ export const refreshShowedFilmsCount = createAction('refreshShowedFilmsCount');
 export const setIsDataLoading = createAction<boolean>('setIsDataLoading');
 export const setAuthorizationStatus = createAction<AuthorizationStatus>('setAuthenticationStatus');
 export const setUser = createAction<User | null>('setUser');
+export const setFavoriteFilms = createAction<Film[]>('setFavoriteFilms');

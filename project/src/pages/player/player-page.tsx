@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Spinner from '../../components/spinner/spinner';
 import { useAppDispatch, useAppSelector } from '../../hooks/store';
 import { loadFilm } from '../../store/api-actions';
@@ -14,6 +14,7 @@ const PlayerPage: FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!film || film.id !== filmId) {
@@ -34,7 +35,7 @@ const PlayerPage: FC = () => {
     return (<NotFoundPage />);
   }
 
-  const {videoLink, name, id, backgroundImage} = film;
+  const {videoLink, name, backgroundImage} = film;
 
   const getProgress = () => currentTime / duration * 100;
   const formatTime = (time: number) => {
@@ -76,6 +77,10 @@ const PlayerPage: FC = () => {
     videoPlayerRef.current.requestFullscreen();
   };
 
+  const handleExit = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="player">
       <video
@@ -89,7 +94,7 @@ const PlayerPage: FC = () => {
         autoPlay={isPlaying}
         muted
       />
-      <Link type="button" className="player__exit" to={`/films/${id}`}>Exit</Link>
+      <button type="button" className="player__exit" onClick={handleExit}>Exit</button>
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">
@@ -101,7 +106,7 @@ const PlayerPage: FC = () => {
         <div className="player__controls-row">
           <button type="button" className="player__play" onClick={handlePlayClick}>
             <svg viewBox="0 0 19 19" width={19} height={19}>
-              {isPlaying ? <use xlinkHref="#pause" /> : <use xlinkHref="#play-s" />}
+              <use xlinkHref={isPlaying ? '#pause' : '#play-s'} />
             </svg>
             <span>Play</span>
           </button>
