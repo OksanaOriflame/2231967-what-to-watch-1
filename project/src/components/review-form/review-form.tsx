@@ -22,7 +22,7 @@ const ReviewForm: FC<Props> = ({ filmId }) => {
     setReviewText(event.target.value);
   };
 
-  const handleOnSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const postComment = async () => {
@@ -46,7 +46,7 @@ const ReviewForm: FC<Props> = ({ filmId }) => {
 
   return (
     <div className="add-review">
-      <form action="#" className="add-review__form" onSubmit={handleOnSubmit}>
+      <form action="#" className="add-review__form" onSubmit={handleSubmit}>
         <div className="rating">
           <div className="rating__stars">
             {[...Array(10) as number[]].map((_, i) => <RatingStar value={10 - i} onChange={handleValueChange} key={`star-${10 - i}`} />)}

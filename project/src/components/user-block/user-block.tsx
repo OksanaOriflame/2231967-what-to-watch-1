@@ -9,7 +9,7 @@ const UserBlock: FC = () => {
   const { user, authorizationStatus } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
 
-  const handleOnClick = () => {
+  const handleClick = () => {
     dispatch(logOutAction());
   };
 
@@ -33,7 +33,7 @@ const UserBlock: FC = () => {
         </div>
       </li>
       <li className="user-block__item">
-        <span onClick={handleOnClick} className="user-block__link">Sign out</span>
+        <span onClick={handleClick} className="user-block__link">Sign out</span>
       </li>
     </ul>
   );

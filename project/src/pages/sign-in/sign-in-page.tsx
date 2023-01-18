@@ -16,7 +16,7 @@ const SignInPage: FC = () => {
     return (<Navigate to={AppRoute.Main} />);
   }
 
-  const handleOnSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (emailRef.current !== null && passwordRef.current !== null) {
@@ -31,7 +31,7 @@ const SignInPage: FC = () => {
         <h1 className="page-title user-page__title">Sign in</h1>
       </header>
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form" onSubmit={handleOnSubmit}>
+        <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" ref={emailRef} />

@@ -6,6 +6,7 @@ import User from '../types/user';
 
 export const changeGenre = createAction<Genre>('changeGenre');
 export const setFilms = createAction<Film[]>('setFilms');
+export const setPromoFilm = createAction<Film>('setPromoFilm');
 export const incrementShowedFilmsCount = createAction('incrementShowedFilmsCount');
 export const refreshShowedFilmsCount = createAction('refreshShowedFilmsCount');
 export const setIsDataLoading = createAction<boolean>('setIsDataLoading');

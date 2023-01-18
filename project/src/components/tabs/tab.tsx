@@ -9,13 +9,13 @@ type Props = {
 }
 
 const Tab: FC<Props> = ({ tabsName, isActive, name, index, onClick }) => {
-  const handleOnClick = () => {
+  const handleClick = () => {
     onClick(index);
   };
 
   return (
     <li className={`${tabsName}__item${isActive ? ` ${tabsName}__item--active` : ''}`}>
-      <div className={`${tabsName}__link`} onClick={handleOnClick}>{name}</div>
+      <div className={`${tabsName}__link`} onClick={handleClick}>{name}</div>
     </li>
   );
 };

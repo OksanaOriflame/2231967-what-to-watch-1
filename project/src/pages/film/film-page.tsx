@@ -6,51 +6,27 @@ import Logo from '../../components/logo/logo';
 import PlayButton from '../../components/play-button/play-button';
 import Spinner from '../../components/spinner/spinner';
 import UserBlock from '../../components/user-block/user-block';
-import { useAppSelector } from '../../hooks/store';
-import api from '../../services/api';
+import { useAppDispatch, useAppSelector } from '../../hooks/store';
+import { loadComments, loadFilm, loadSimilar } from '../../store/api-actions';
 import AuthorizationStatus from '../../types/authorization-status';
-import Comment from '../../types/comment';
-import Film from '../../types/film';
 import NotFoundPage from '../not-found/not-found-page';
 
 const FilmPage: FC = () => {
-  const {id: filmId} = useParams();
-  const [film, setFilm] = useState<Film | null>(null);
-  const [similar, setSimilar] = useState<Film[]>([]);
-  const [comments, setComments] = useState<Comment[]>([]);
+  const filmId = Number(useParams().id);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { authorizationStatus } = useAppSelector((state) => state);
+  const {film, similar, comments, authorizationStatus} = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const fetchFilm = async () => {
-      if (!filmId) {
-        return;
-      }
-      const { data: filmData } = await api.get<Film>(`/films/${filmId}`);
-      setFilm(filmData);
-    };
+    if (!film || film.id !== filmId) {
+      setIsLoading(true);
+      dispatch(loadFilm(filmId));
+      dispatch(loadSimilar(filmId));
+      dispatch(loadComments(filmId));
+    }
 
-    const fetchSimilar = async () => {
-      if (!filmId) {
-        return;
-      }
-      const { data: similarData } = await api.get<Film[]>(`/films/${filmId}/similar`);
-      setSimilar(similarData);
-    };
-
-    const fetchComments = async () => {
-      if (!filmId) {
-        return;
-      }
-      const { data: commentsData } = await api.get<Comment[]>(`/comments/${filmId}`);
-      setComments(commentsData);
-    };
-
-    fetchFilm()
-      .then(() => fetchSimilar())
-      .then(() => fetchComments())
-      .finally(() => setIsLoading(false));
-  }, [filmId]);
+    setIsLoading(false);
+  }, [filmId, dispatch, film]);
 
   if (isLoading)
   {
@@ -82,7 +58,7 @@ const FilmPage: FC = () => {
                 <span className="film-card__year">{film.released}</span>
               </p>
               <div className="film-card__buttons">
-                <PlayButton film={film} />
+                <PlayButton filmId={film.id} />
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width={19} height={20}>
                     <use xlinkHref="#add" />

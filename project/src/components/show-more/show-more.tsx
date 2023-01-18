@@ -4,13 +4,13 @@ import { incrementShowedFilmsCount } from '../../store/action';
 
 const ShowMore: FC = () => {
   const dispatch = useAppDispatch();
-  const handleOnClick = () =>{
+  const handleClick = () =>{
     dispatch(incrementShowedFilmsCount());
   };
 
   return (
     <div className="catalog__more">
-      <button className="catalog__button" type="button" onClick={handleOnClick}>Show more</button>
+      <button className="catalog__button" type="button" onClick={handleClick}>Show more</button>
     </div>
   );
 };

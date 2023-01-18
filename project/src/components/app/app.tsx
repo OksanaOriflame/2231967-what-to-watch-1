@@ -26,7 +26,7 @@ const App: FC = () => {
       <ScrollToTop />
       <RefreshShowMore />
       <Routes>
-        <Route path={AppRoute.Main} element={<MainPage promoFilm={films[0]} />} />
+        <Route path={AppRoute.Main} element={<MainPage />} />
         <Route path={AppRoute.SignIn} element={<SignInPage />} />
         <Route path={AppRoute.MyList} element={
           <PrivateRoute>
