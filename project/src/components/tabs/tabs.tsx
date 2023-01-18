@@ -13,14 +13,14 @@ type Props = {
 
 const Tabs: FC<Props> = ({ tabsName, tabs, tabsWrapper: TabsWrapper, tabsListWrapper: TabsListWrapper }) => {
   const [activeTab, setActiveTab] = useState(0);
-  const handleOnClick = (index: number) => {
+  const handleClick = (index: number) => {
     setActiveTab(index);
   };
 
   return (
     <TabsWrapper>
       <TabsListWrapper>
-        {tabs.map((tab, i) => <Tab tabsName={tabsName} name={tab.name} isActive={i === activeTab} index={i} key={tab.name} onClick={handleOnClick} />)}
+        {tabs.map((tab, i) => <Tab tabsName={tabsName} name={tab.name} isActive={i === activeTab} index={i} key={tab.name} onClick={handleClick} />)}
       </TabsListWrapper>
       {tabs[activeTab].content}
     </TabsWrapper>

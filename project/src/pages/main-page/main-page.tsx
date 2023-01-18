@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import Film from '../../types/film';
 import FilmList from '../../components/film-list/film-list';
 import GenreList from '../../components/genre-list/genre-list';
 import Genre from '../../types/genre';
@@ -8,17 +7,14 @@ import ShowMore from '../../components/show-more/show-more';
 import UserBlock from '../../components/user-block/user-block';
 import PlayButton from '../../components/play-button/play-button';
 import Logo from '../../components/logo/logo';
+import AddFavoriteButton from '../../components/add-favorite-button/add-favorite-button';
 
-type Props = {
-  promoFilm: Film;
-}
-
-const MainPage: FC<Props> = ({ promoFilm }) => {
-  const { films, activeGenre, showedFilmsCount } = useAppSelector((state) => state);
-  const { name: title, genre, released, posterImage, backgroundImage } = promoFilm;
+const MainPage: FC = () => {
+  const { films, promoFilm, activeGenre, showedFilmsCount } = useAppSelector((state) => state);
   const genres = [Genre.ALL_GENRES, ...new Set(films.map((film) => film.genre))] as Genre[];
   const filteredFilms = films.filter((film) => film.genre === activeGenre || activeGenre === Genre.ALL_GENRES);
   const hasMoreFilms = filteredFilms.length > showedFilmsCount;
+  const { name: title, genre, released, posterImage, backgroundImage, id } = promoFilm ? promoFilm : films[0];
 
   return (
     <>
@@ -43,14 +39,8 @@ const MainPage: FC<Props> = ({ promoFilm }) => {
                 <span className="film-card__year">{released}</span>
               </p>
               <div className="film-card__buttons">
-                <PlayButton film={promoFilm}/>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width={19} height={20}>
-                    <use xlinkHref="#add" />
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+                <PlayButton filmId={id}/>
+                <AddFavoriteButton filmId={id} />
               </div>
             </div>
           </div>

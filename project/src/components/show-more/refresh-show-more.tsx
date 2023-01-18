@@ -9,8 +9,7 @@ function RefreshShowMore() {
 
   useEffect(() => {
     dispatch(refreshShowedFilmsCount());
-    // eslint-disable-next-line
-  }, [pathname]);
+  }, [pathname, dispatch]);
 
   return null;
 }
