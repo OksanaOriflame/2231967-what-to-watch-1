@@ -1,5 +1,5 @@
 import { FC, FormEvent, useRef } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/store';
@@ -9,6 +9,7 @@ import AuthorizationStatus from '../../types/authorization-status';
 const SignInPage: FC = () => {
   const { authorizationStatus } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
@@ -21,6 +22,7 @@ const SignInPage: FC = () => {
 
     if (emailRef.current !== null && passwordRef.current !== null) {
       dispatch(logInAction({email: emailRef.current.value, password: passwordRef.current.value}));
+      navigate(-1);
     }
   };
 

@@ -11,7 +11,7 @@ const PlayerPage: FC = () => {
   const { film } = useAppSelector((state) => state);
   const [duration, setDuration] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const PlayerPage: FC = () => {
 
   const {videoLink, name, backgroundImage} = film;
 
-  const getProgress = () => currentTime / duration * 100;
+  const getProgress = () => duration === 0 ? 0 : currentTime / duration * 100;
   const formatTime = (time: number) => {
     const evenTime = Math.round(time);
     return new Date(evenTime * 1000).toISOString().substring(11, 19);

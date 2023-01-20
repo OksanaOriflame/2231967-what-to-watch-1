@@ -14,7 +14,7 @@ const Review: FC<Props> = ({ comment }) => (
         <time className="review__date" dateTime="2016-12-24">{new Date(comment.date).toLocaleDateString('en-us', { year:'numeric', month:'long', day:'numeric'})}</time>
       </footer>
     </blockquote>
-    <div className="review__rating">{comment.rating}</div>
+    <div className="review__rating">{comment.rating.toFixed(1)}</div>
   </div>
 );
 

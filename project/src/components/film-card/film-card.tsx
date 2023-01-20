@@ -39,12 +39,14 @@ const FilmCard: FC<Props> = ({ film, onMouseOver }) => {
 
   return (
     <article className="small-film-card catalog__films-card" onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}>
-      <div className="small-film-card__image">
-        <VideoPlayer film={film} isPlay={isPlay} width={280} height={175} />
-      </div>
-      <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${id}`}>{name}</Link>
-      </h3>
+      <Link to={`/films/${id}`} className="small-film-card__link">
+        <div className="small-film-card__image">
+          <VideoPlayer film={film} isPlay={isPlay} width={280} height={175} />
+        </div>
+        <h3 className="small-film-card__title">
+          <span className="small-film-card__link">{name}</span>
+        </h3>
+      </Link>
     </article>);
 };
 

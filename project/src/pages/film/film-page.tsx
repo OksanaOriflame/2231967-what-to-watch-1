@@ -19,13 +19,13 @@ const FilmPage: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    setIsLoading(true);
     if (!film || film.id !== filmId) {
-      setIsLoading(true);
       dispatch(loadFilm(filmId));
       dispatch(loadSimilar(filmId));
-      dispatch(loadComments(filmId));
     }
 
+    dispatch(loadComments(filmId));
     setIsLoading(false);
   }, [filmId, dispatch, film]);
 
@@ -78,7 +78,7 @@ const FilmPage: FC = () => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmList films={similar} />
+          <FilmList films={similar.slice(0, 4)} />
         </section>
         <footer className="page-footer">
           <Logo isLight />
