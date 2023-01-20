@@ -6,7 +6,7 @@ type Props = {
 }
 
 const Details: FC<Props> = ({ film }) => {
-  const starring = film.starring.map((actor, i) => (<>{actor}{i !== film.starring.length - 1 && (<>, <br /></>)}</>));
+  const starring = film.starring.map((actor, i) => (<span key={actor}>{actor}{i !== film.starring.length - 1 && (<>, <br /></>)}</span>));
 
   return (
     <div className="film-card__text film-card__row">

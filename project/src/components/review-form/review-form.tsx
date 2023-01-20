@@ -28,11 +28,12 @@ const ReviewForm: FC<Props> = ({ filmId }) => {
     const postComment = async () => {
       setFormDisabled(true);
       await api.post(`/comments/${filmId}`, {comment: reviewText, rating: reviewValue});
+
     };
 
     postComment()
       .then(() => {
-        navigate(`/films/${filmId}`);
+        navigate(-1);
       })
       .catch((err: Error) => {
         setError(err);
