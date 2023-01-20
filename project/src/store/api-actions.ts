@@ -17,8 +17,13 @@ export const loadFilmsAction = createAsyncThunk<void, undefined, { dispatch: App
     dispatch(setFilms(films));
     const { data: promoFilm } = await api.get<Film>('/promo');
     dispatch(setPromoFilm(promoFilm));
-    const { data: favoriteFilms } = await api.get<Film[]>('/favorite');
-    dispatch(setFavoriteFilms(favoriteFilms));
+    try {
+      const { data: favoriteFilms } = await api.get<Film[]>('/favorite');
+      dispatch(setFavoriteFilms(favoriteFilms));
+    }
+    catch {
+      dispatch(setFavoriteFilms(Array<Film>(0)));
+    }
     dispatch(setIsDataLoading(false));
   });
 
